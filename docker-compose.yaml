@@ -1,3 +1,5 @@
+# We will setup on the 10000 block for these
+# Note 80-->10080
 version: "2"
 
 services:
@@ -6,20 +8,20 @@ services:
     image: fcrepoapix/apix-fuseki:2.4.1
     container_name: fuseki
     ports:
-      - "3030:8080"
+      - "13030:8080"
 
   fcrepo:
     image: fcrepoapix/apix-fcrepo:4.7.0
     container_name: fcrepo
     ports:
-      - "8080:8080"
+      - "18080:8080"
 
   indexing:
     image: fcrepoapix/apix-indexing:latest
     container_name: indexing
     env_file: apix.env
     ports:
-      - "9090:9090"
+      - "19090:9090"
     depends_on:
       - fcrepo
       - fuseki
@@ -30,12 +32,12 @@ services:
     image: fcrepoapix/apix-acrepo:latest
     container_name: acrepo
     ports:
-      - "9102:9102"
-      - "9103:9103"
-      - "9104:9104"
-      - "9105:9105"
-      - "9106:9106"
-      - "9107:9107"
+      - "19102:9102"
+      - "19103:9103"
+      - "19104:9104"
+      - "19105:9105"
+      - "19106:9106"
+      - "19107:9107"
     depends_on:
       - fcrepo
     links:
@@ -46,8 +48,8 @@ services:
     container_name: apix
     env_file: apix.env
     ports:
-      - "80:80"
-      - "8081:8081"
+      - "10080:0080"
+      - "18081:8081"
     depends_on:
       - fcrepo
 
@@ -55,4 +57,4 @@ services:
     image: fcrepoapix/apix-fits:1.0.3
     container_name: fits
     ports:
-      - "8082:8080"
+      - "18082:8080"
